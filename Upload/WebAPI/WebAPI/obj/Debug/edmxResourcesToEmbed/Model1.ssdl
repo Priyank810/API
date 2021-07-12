@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DeparmentID" />
+    </Key>
+    <Property Name="DeparmentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="varchar" MaxLength="1000" />
+    <Property Name="Department" Type="varchar" MaxLength="1000" />
+    <Property Name="MailID" Type="varchar" MaxLength="1000" />
+    <Property Name="DOJ" Type="date" />
+    <Property Name="gender" Type="varchar" MaxLength="255" />
+    <Property Name="primaryaddress" Type="varchar(max)" />
+    <Property Name="secondaryaddress" Type="varchar(max)" />
+    <Property Name="imgFile" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Hobby">
+    <Key>
+      <PropertyRef Name="hobbyid" />
+    </Key>
+    <Property Name="hobbyid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hobby" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LookUp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lookupname" Type="varchar" MaxLength="255" />
+    <Property Name="lookupdescription" Type="varchar(max)" />
+    <Property Name="createddate" Type="date" />
+    <Property Name="modifieddate" Type="date" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="createdby" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="LookUpData">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lookupid" Type="int" />
+    <Property Name="value" Type="varchar" MaxLength="255" />
+    <Property Name="valueindex" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="taskid" />
+    </Key>
+    <Property Name="taskid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeid" Type="int" />
+    <Property Name="tasktitle" Type="varchar(max)" />
+    <Property Name="taskdescription" Type="varchar(max)" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+    <Property Name="iscompleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserDB">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="1000" />
+    <Property Name="email" Type="varchar" MaxLength="1000" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="isadmin" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserExperience">
+    <Key>
+      <PropertyRef Name="expid" />
+    </Key>
+    <Property Name="expid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="technology" Type="varchar(max)" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+    <Property Name="employeeid" Type="int" />
+  </EntityType>
+  <EntityType Name="worklog">
+    <Key>
+      <PropertyRef Name="logid" />
+    </Key>
+    <Property Name="logid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="taskid" Type="int" />
+    <Property Name="tasktitle" Type="varchar(max)" />
+    <Property Name="logdescription" Type="varchar(max)" />
+    <Property Name="logdate" Type="date" />
+    <Property Name="loghour" Type="int" />
+    <Property Name="logminute" Type="int" />
+    <Property Name="employeeid" Type="int" />
+  </EntityType>
+  <Association Name="FK__LookUpDat__looku__52593CB8">
+    <End Role="LookUp" Type="Self.LookUp" Multiplicity="0..1" />
+    <End Role="LookUpData" Type="Self.LookUpData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookUp">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="LookUpData">
+        <PropertyRef Name="lookupid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeDBModelStoreContainer">
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hobby" EntityType="Self.Hobby" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookUp" EntityType="Self.LookUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookUpData" EntityType="Self.LookUpData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDB" EntityType="Self.UserDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserExperience" EntityType="Self.UserExperience" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="worklog" EntityType="Self.worklog" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__LookUpDat__looku__52593CB8" Association="Self.FK__LookUpDat__looku__52593CB8">
+      <End Role="LookUp" EntitySet="LookUp" />
+      <End Role="LookUpData" EntitySet="LookUpData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

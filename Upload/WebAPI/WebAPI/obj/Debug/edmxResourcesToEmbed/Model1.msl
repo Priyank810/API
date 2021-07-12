@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeDBModelStoreContainer" CdmEntityContainer="EmployeeDBEntities">
+    <EntitySetMapping Name="UserDB">
+      <EntityTypeMapping TypeName="EmployeeDBModel.UserDB">
+        <MappingFragment StoreEntitySet="UserDB">
+          <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="EmployeeDBModel.Departments">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="DeparmentID" ColumnName="DeparmentID" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="EmployeeDBModel.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="imgFile" ColumnName="imgFile" />
+          <ScalarProperty Name="secondaryaddress" ColumnName="secondaryaddress" />
+          <ScalarProperty Name="primaryaddress" ColumnName="primaryaddress" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="MailID" ColumnName="MailID" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hobby">
+      <EntityTypeMapping TypeName="EmployeeDBModel.Hobby">
+        <MappingFragment StoreEntitySet="Hobby">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="hobby1" ColumnName="hobby" />
+          <ScalarProperty Name="hobbyid" ColumnName="hobbyid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserExperience">
+      <EntityTypeMapping TypeName="EmployeeDBModel.UserExperience">
+        <MappingFragment StoreEntitySet="UserExperience">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="technology" ColumnName="technology" />
+          <ScalarProperty Name="expid" ColumnName="expid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="EmployeeDBModel.Tasks">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="iscompleted" ColumnName="iscompleted" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="taskdescription" ColumnName="taskdescription" />
+          <ScalarProperty Name="tasktitle" ColumnName="tasktitle" />
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="taskid" ColumnName="taskid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="worklog">
+      <EntityTypeMapping TypeName="EmployeeDBModel.worklog">
+        <MappingFragment StoreEntitySet="worklog">
+          <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+          <ScalarProperty Name="logminute" ColumnName="logminute" />
+          <ScalarProperty Name="loghour" ColumnName="loghour" />
+          <ScalarProperty Name="logdate" ColumnName="logdate" />
+          <ScalarProperty Name="logdescription" ColumnName="logdescription" />
+          <ScalarProperty Name="tasktitle" ColumnName="tasktitle" />
+          <ScalarProperty Name="taskid" ColumnName="taskid" />
+          <ScalarProperty Name="logid" ColumnName="logid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookUp">
+      <EntityTypeMapping TypeName="EmployeeDBModel.LookUp">
+        <MappingFragment StoreEntitySet="LookUp">
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+          <ScalarProperty Name="lookupdescription" ColumnName="lookupdescription" />
+          <ScalarProperty Name="lookupname" ColumnName="lookupname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookUpData">
+      <EntityTypeMapping TypeName="EmployeeDBModel.LookUpData">
+        <MappingFragment StoreEntitySet="LookUpData">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="valueindex" ColumnName="valueindex" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="lookupid" ColumnName="lookupid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

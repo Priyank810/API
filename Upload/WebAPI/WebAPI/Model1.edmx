@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmployeeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DeparmentID" />
+          </Key>
+          <Property Name="DeparmentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="1000" />
+          <Property Name="Department" Type="varchar" MaxLength="1000" />
+          <Property Name="MailID" Type="varchar" MaxLength="1000" />
+          <Property Name="DOJ" Type="date" />
+          <Property Name="gender" Type="varchar" MaxLength="255" />
+          <Property Name="primaryaddress" Type="varchar(max)" />
+          <Property Name="secondaryaddress" Type="varchar(max)" />
+          <Property Name="imgFile" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Hobby">
+          <Key>
+            <PropertyRef Name="hobbyid" />
+          </Key>
+          <Property Name="hobbyid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hobby" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookUp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lookupname" Type="varchar" MaxLength="255" />
+          <Property Name="lookupdescription" Type="varchar(max)" />
+          <Property Name="createddate" Type="date" />
+          <Property Name="modifieddate" Type="date" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="createdby" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LookUpData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lookupid" Type="int" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="valueindex" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="taskid" />
+          </Key>
+          <Property Name="taskid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeid" Type="int" />
+          <Property Name="tasktitle" Type="varchar(max)" />
+          <Property Name="taskdescription" Type="varchar(max)" />
+          <Property Name="startdate" Type="date" />
+          <Property Name="enddate" Type="date" />
+          <Property Name="iscompleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserDB">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="1000" />
+          <Property Name="email" Type="varchar" MaxLength="1000" />
+          <Property Name="password" Type="varchar(max)" />
+          <Property Name="isadmin" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserExperience">
+          <Key>
+            <PropertyRef Name="expid" />
+          </Key>
+          <Property Name="expid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="technology" Type="varchar(max)" />
+          <Property Name="startdate" Type="date" />
+          <Property Name="enddate" Type="date" />
+          <Property Name="employeeid" Type="int" />
+        </EntityType>
+        <EntityType Name="worklog">
+          <Key>
+            <PropertyRef Name="logid" />
+          </Key>
+          <Property Name="logid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskid" Type="int" />
+          <Property Name="tasktitle" Type="varchar(max)" />
+          <Property Name="logdescription" Type="varchar(max)" />
+          <Property Name="logdate" Type="date" />
+          <Property Name="loghour" Type="int" />
+          <Property Name="logminute" Type="int" />
+          <Property Name="employeeid" Type="int" />
+        </EntityType>
+        <Association Name="FK__LookUpDat__looku__52593CB8">
+          <End Role="LookUp" Type="Self.LookUp" Multiplicity="0..1" />
+          <End Role="LookUpData" Type="Self.LookUpData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LookUpData">
+              <PropertyRef Name="lookupid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDBModelStoreContainer">
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hobby" EntityType="Self.Hobby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookUp" EntityType="Self.LookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookUpData" EntityType="Self.LookUpData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDB" EntityType="Self.UserDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserExperience" EntityType="Self.UserExperience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="worklog" EntityType="Self.worklog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LookUpDat__looku__52593CB8" Association="Self.FK__LookUpDat__looku__52593CB8">
+            <End Role="LookUp" EntitySet="LookUp" />
+            <End Role="LookUpData" EntitySet="LookUpData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UserDB">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isadmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DeparmentID" />
+          </Key>
+          <Property Name="DeparmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MailID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DOJ" Type="DateTime" Precision="0" />
+          <Property Name="gender" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="primaryaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="secondaryaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imgFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="EmployeeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDB" EntityType="Self.UserDB" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Hobby" EntityType="EmployeeDBModel.Hobby" />
+          <EntitySet Name="UserExperience" EntityType="EmployeeDBModel.UserExperience" />
+          <EntitySet Name="Tasks" EntityType="EmployeeDBModel.Tasks" />
+          <EntitySet Name="worklog" EntityType="EmployeeDBModel.worklog" />
+          <EntitySet Name="LookUp" EntityType="EmployeeDBModel.LookUp" />
+          <EntitySet Name="LookUpData" EntityType="EmployeeDBModel.LookUpData" />
+          <AssociationSet Name="FK__LookUpDat__looku__52593CB8" Association="EmployeeDBModel.FK__LookUpDat__looku__52593CB8">
+            <End Role="LookUp" EntitySet="LookUp" />
+            <End Role="LookUpData" EntitySet="LookUpData" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Hobby">
+          <Key>
+            <PropertyRef Name="hobbyid" />
+          </Key>
+          <Property Name="hobbyid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hobby1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserExperience">
+          <Key>
+            <PropertyRef Name="expid" />
+          </Key>
+          <Property Name="expid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="technology" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="startdate" Type="DateTime" Precision="0" />
+          <Property Name="enddate" Type="DateTime" Precision="0" />
+          <Property Name="employeeid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="taskid" />
+          </Key>
+          <Property Name="taskid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeid" Type="Int32" />
+          <Property Name="tasktitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="taskdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="startdate" Type="DateTime" Precision="0" />
+          <Property Name="enddate" Type="DateTime" Precision="0" />
+          <Property Name="iscompleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="worklog">
+          <Key>
+            <PropertyRef Name="logid" />
+          </Key>
+          <Property Name="logid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskid" Type="Int32" />
+          <Property Name="tasktitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="logdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="logdate" Type="DateTime" Precision="0" />
+          <Property Name="loghour" Type="Int32" />
+          <Property Name="logminute" Type="Int32" />
+          <Property Name="employeeid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="LookUp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lookupname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lookupdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createddate" Type="DateTime" Precision="0" />
+          <Property Name="modifieddate" Type="DateTime" Precision="0" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="createdby" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LookUpData" Relationship="EmployeeDBModel.FK__LookUpDat__looku__52593CB8" FromRole="LookUp" ToRole="LookUpData" />
+        </EntityType>
+        <EntityType Name="LookUpData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lookupid" Type="Int32" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="valueindex" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="LookUp" Relationship="EmployeeDBModel.FK__LookUpDat__looku__52593CB8" FromRole="LookUpData" ToRole="LookUp" />
+        </EntityType>
+        <Association Name="FK__LookUpDat__looku__52593CB8">
+          <End Type="EmployeeDBModel.LookUp" Role="LookUp" Multiplicity="0..1" />
+          <End Type="EmployeeDBModel.LookUpData" Role="LookUpData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookUp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LookUpData">
+              <PropertyRef Name="lookupid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeDBModelStoreContainer" CdmEntityContainer="EmployeeDBEntities">
+          <EntitySetMapping Name="UserDB">
+            <EntityTypeMapping TypeName="EmployeeDBModel.UserDB">
+              <MappingFragment StoreEntitySet="UserDB">
+                <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DeparmentID" ColumnName="DeparmentID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="imgFile" ColumnName="imgFile" />
+                <ScalarProperty Name="secondaryaddress" ColumnName="secondaryaddress" />
+                <ScalarProperty Name="primaryaddress" ColumnName="primaryaddress" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="MailID" ColumnName="MailID" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hobby">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Hobby">
+              <MappingFragment StoreEntitySet="Hobby">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="hobby1" ColumnName="hobby" />
+                <ScalarProperty Name="hobbyid" ColumnName="hobbyid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserExperience">
+            <EntityTypeMapping TypeName="EmployeeDBModel.UserExperience">
+              <MappingFragment StoreEntitySet="UserExperience">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="technology" ColumnName="technology" />
+                <ScalarProperty Name="expid" ColumnName="expid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Tasks">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="iscompleted" ColumnName="iscompleted" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="taskdescription" ColumnName="taskdescription" />
+                <ScalarProperty Name="tasktitle" ColumnName="tasktitle" />
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="taskid" ColumnName="taskid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="worklog">
+            <EntityTypeMapping TypeName="EmployeeDBModel.worklog">
+              <MappingFragment StoreEntitySet="worklog">
+                <ScalarProperty Name="employeeid" ColumnName="employeeid" />
+                <ScalarProperty Name="logminute" ColumnName="logminute" />
+                <ScalarProperty Name="loghour" ColumnName="loghour" />
+                <ScalarProperty Name="logdate" ColumnName="logdate" />
+                <ScalarProperty Name="logdescription" ColumnName="logdescription" />
+                <ScalarProperty Name="tasktitle" ColumnName="tasktitle" />
+                <ScalarProperty Name="taskid" ColumnName="taskid" />
+                <ScalarProperty Name="logid" ColumnName="logid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookUp">
+            <EntityTypeMapping TypeName="EmployeeDBModel.LookUp">
+              <MappingFragment StoreEntitySet="LookUp">
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="modifieddate" ColumnName="modifieddate" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="lookupdescription" ColumnName="lookupdescription" />
+                <ScalarProperty Name="lookupname" ColumnName="lookupname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookUpData">
+            <EntityTypeMapping TypeName="EmployeeDBModel.LookUpData">
+              <MappingFragment StoreEntitySet="LookUpData">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="valueindex" ColumnName="valueindex" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="lookupid" ColumnName="lookupid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
